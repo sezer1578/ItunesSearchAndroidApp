@@ -1,14 +1,9 @@
 package com.ozaltun.myitunesapp.view
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,8 +18,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private var homeFragmentAdapter: HomeFragmentAdapter? = null
     private val viewModel: HomeFragmentViewModel by viewModels()
-    var sharedPreferences: SharedPreferences? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,48 +25,9 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
         loadRecyclerView()
-        getPreferences()
+        moviesOnClick()
         return binding.root
     }
-
-    fun getPreferences() {
-        sharedPreferences = activity?.getSharedPreferences(
-            "com.ozaltun.myitunesapp",
-            Context.MODE_PRIVATE
-        )
-        binding.apply {
-            textFieldInput.setText(
-                sharedPreferences?.getString(
-                    Constant.SHARED_PREF_SEARCHTERM_KEY,
-                    ""
-                )
-            )
-            toggleButton.check(
-                getSelectedGenre(
-                    sharedPreferences?.getString(
-                        Constant.SHARED_PREF_CATEGORY_KEY,
-                        "movie"
-                    )!!
-                )
-            )
-        }
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        sharedPreferences?.edit()?.putString(Constant.SHARED_PREF_CATEGORY_KEY, getSelectedType())
-            ?.apply()
-        sharedPreferences?.edit()
-            ?.putString(Constant.SHARED_PREF_SEARCHTERM_KEY, binding.textFieldInput.text.toString())
-            ?.apply()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        getSearch()
-    }
-
 
     private fun search(term: String, entity: String) {
         if (viewModel.checkInternetConnection()) {
@@ -83,64 +37,16 @@ class HomeFragment : Fragment() {
                 }
             }
         } else {
-            Toast.makeText(context, "Check internet connection", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.internet), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun getSearch() {
-        binding.textFieldInput.apply {
-            if (text.isNullOrEmpty()) {
-                search(Constant.DEFAULT_SEARCH_TERM, getSelectedType())
-            } else {
-                search(text.toString(), getSelectedType())
-            }
-        }
-        binding.textFieldInput.doOnTextChanged { text, start, before, count ->
-            if (text?.length!! > 2) {
-                search(binding.textFieldInput.text.toString(), getSelectedType())
-            } else {
-                search(Constant.DEFAULT_SEARCH_TERM, getSelectedType())
-            }
-        }
-    }
-
-    fun getSelectedType(): String {
-        when (binding.toggleButton.checkedButtonId) {
-            binding.MoviesButton.id -> {
-                return Constant.QUERY_MOVIES
-            }
-            binding.AppsButton.id -> {
-                return Constant.QUERY_APPS
-            }
-            binding.BooksButton.id -> {
-                return Constant.QUERY_BOOKS
-            }
-            binding.MusicsButton.id -> {
-                return Constant.QUERY_MUSIC
-            }
-            else -> return Constant.QUERY_MUSIC
-        }
-    }
-
-    fun getSelectedGenre(genre: String): Int {
-        when (genre) {
-            Constant.QUERY_MOVIES -> {
-                return binding.MoviesButton.id
-            }
-            Constant.QUERY_APPS -> {
-                return binding.AppsButton.id
-            }
-            Constant.QUERY_BOOKS -> {
-                return binding.BooksButton.id
-            }
-            Constant.QUERY_MUSIC -> {
-                return binding.MusicsButton.id
-            }
-            else -> return binding.MoviesButton.id
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     fun booksOnClick() {
+
         binding.textFieldInput.apply {
             if (text.isNullOrEmpty()) {
                 search(Constant.DEFAULT_SEARCH_TERM, Constant.QUERY_BOOKS)
@@ -168,7 +74,6 @@ class HomeFragment : Fragment() {
                 search(binding.textFieldInput.text.toString(), Constant.QUERY_APPS)
             }
         }
-
     }
 
     fun moviesOnClick() {
@@ -181,11 +86,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun loadRecyclerView() {
         homeFragmentAdapter = HomeFragmentAdapter()
         binding.recyclerView.adapter = homeFragmentAdapter
     }
-
-
 }

@@ -6,18 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import com.ozaltun.myitunesapp.R
 import com.ozaltun.myitunesapp.databinding.FragmentDetailBinding
 import com.ozaltun.myitunesapp.model.Result
 import com.ozaltun.myitunesapp.utils.Constant
-import org.jsoup.Jsoup
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     var result: Result? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         binding.detailsFragment = this
         return binding.root
@@ -33,9 +35,9 @@ class DetailFragment : Fragment() {
 
     }
 
-    private fun setViews() { //Ana sayfada seçilen item ın türüne göre detay sayfasının düzenlenmesi
+    private fun setViews() { //According to home page , show query on the detail page
         when (result?.kind) {
-            Constant.TYPE_SONG, Constant.TYPE_MUSICVIDEO -> {
+            Constant.TYPE_SONG, Constant.TYPE_MUSIC_VIDEO -> {
                 setMusicViews()
             }
             Constant.TYPE_MOVIE -> {
@@ -53,63 +55,43 @@ class DetailFragment : Fragment() {
 
     private fun setMusicViews() {
         binding.apply {
-            firstText.setText(result?.trackName)
-            secondText.setText("Collection: " + result?.collectionName)
-            thirdText.setText("Artist: " + result?.artistName)
-            fourthText.setText("Country: " + result?.country)
-            line5.visibility = View.VISIBLE
+            itunesNameDetail.setText(result?.trackName)
+            itunesGenreDetail.setText(getString(R.string.collection) + " " + result?.collectionName)
+            itunesDescriptionDetail.setText(getString(R.string.author) + " " + result?.artistName)
+            itunesCountryDetail.setText(getString(R.string.country) + " " + result?.country)
         }
     }
 
     private fun setMovieViews() {
         binding.apply {
-            firstText.setText(result?.trackName)
-            secondText.setText(result?.primaryGenreName)
-            thirdText.setText(result?.longDescription)
-            thirdText.textSize = 14F
-            fourthText.setText("Country: " + result?.country)
-            line.visibility = View.VISIBLE
-            line2.visibility = View.VISIBLE
+            itunesNameDetail.setText(result?.trackName)
+            itunesGenreDetail.setText(result?.primaryGenreName)
+            itunesDescriptionDetail.setText(result?.longDescription)
+            itunesCountryDetail.setText(getString(R.string.country) + " " + result?.country)
         }
     }
 
     private fun setBooksViews() {
         binding.apply {
-            firstText.setText(result?.trackName)
-            secondText.setText("Author: " + result?.artistName)
-           /* var genres = ""
-            for (genre in result!!.genres) {
-                genres += genre + ","
+            itunesNameDetail.setText(result?.trackName)
+            itunesGenreDetail.setText(getString(R.string.author) + " " + result?.artistName)
+            val description: String? = null
+            if (description == null) {
+                itunesCountryDetail.setText(getString(R.string.noDesc))
+            } else {
+                itunesCountryDetail.setText(description)
             }
-            genres = genres.substring(0, genres.length - 1)
-            thirdText.setText(genres)
-            */
 
-            val description = Jsoup.parse(result!!.longDescription).text()
-            fourthText.setText(description)
-            fourthText.textSize = 14F
-
-            line2.visibility = View.VISIBLE
-            line3.visibility = View.VISIBLE
-            line5.visibility = View.VISIBLE
         }
     }
 
     private fun setSoftwareViews() {
         binding.apply {
-            firstText.setText(result?.trackName)
-            secondText.setText(result?.primaryGenreName)
-            thirdText.setText(result?.longDescription)
-            thirdText.textSize = 14F
-            line.visibility = View.VISIBLE
-            line2.visibility = View.VISIBLE
-            fourthText.setText("Seller: " + result?.trackName)
+            itunesNameDetail.setText(result?.trackName)
+            itunesGenreDetail.setText(result?.primaryGenreName)
+            itunesDescriptionDetail.setText(result?.longDescription)
+            itunesCountryDetail.setText("Country: " + result?.country)
         }
     }
 
-    fun backNavListener(view: View) {
-        val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
-        view.findNavController().navigate(action)
-
-    }
 }

@@ -1,18 +1,28 @@
 package com.ozaltun.myitunesapp
 
-import android.content.Context
-import android.content.SharedPreferences
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 
 class MainActivity : AppCompatActivity() {
-    var sharedPreferences: SharedPreferences? = null
+
+    lateinit var navController: NavController
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        sharedPreferences =
-            getSharedPreferences("com.ozaltun.myitunesapp", Context.MODE_PRIVATE)
-        sharedPreferences?.edit()?.remove("category")?.apply()
-        sharedPreferences?.edit()?.remove("searchTerm")?.apply()
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor(getString(R.color.orange))))
+        navController = findNavController(R.id.fragmentContainerView)
+        setupActionBarWithNavController(navController)
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

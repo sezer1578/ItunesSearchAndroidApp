@@ -5,4 +5,13 @@
     <string name="music">Music</string>
     <string name="apps">App</string>
     <string name="books">Book</string>
+    <string name="free">Free</string>
+    <string name="releaseDate">Release Date </string>
+    <string name="dolar">$</string>
+    <string name="noDesc">No description</string>
+    <string name="author">Author</string>
+    <string name="country">Country</string>
+    <string name="collection">Collection</string>
+    <string name="internet">Check internet connection</string>
+    <string name="apple">apple</string>
 </resources>

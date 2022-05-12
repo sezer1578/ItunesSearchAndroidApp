@@ -35,19 +35,8 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-
-        <ImageView
-            android:id="@+id/backNavIcon"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
-            android:onClick="@{view->detailsFragment.backNavListener(view)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_backnavicon" />
-
         <TextView
-            android:id="@+id/firstText"
+            android:id="@+id/itunesNameDetail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -62,34 +51,9 @@
             app:layout_constraintTop_toBottomOf="@+id/imageViewPoster" />
 
 
-        <View
-            android:id="@+id/line5"
-            android:layout_width="360dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="9dp"
-            android:visibility="invisible"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/secondText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/firstText" />
-
-        <View
-            android:id="@+id/line"
-            android:layout_width="360dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="9dp"
-            android:visibility="invisible"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/thirdText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/secondText" />
 
         <TextView
-            android:id="@+id/secondText"
+            android:id="@+id/itunesGenreDetail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -99,23 +63,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imageViewPoster"
             app:layout_constraintStart_toStartOf="@+id/imageViewPoster"
-            app:layout_constraintTop_toBottomOf="@+id/firstText" />
+            app:layout_constraintTop_toBottomOf="@+id/itunesNameDetail" />
 
-        <View
-            android:id="@+id/line2"
-            android:layout_width="360dp"
-            android:layout_height="1dp"
-            android:visibility="invisible"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="9dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/fourthText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/thirdText" />
 
         <TextView
-            android:id="@+id/thirdText"
+            android:id="@+id/itunesDescriptionDetail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -124,24 +76,12 @@
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="@+id/imageViewPoster"
             app:layout_constraintStart_toStartOf="@+id/imageViewPoster"
-            app:layout_constraintTop_toBottomOf="@+id/secondText" />
+            app:layout_constraintTop_toBottomOf="@+id/itunesGenreDetail" />
 
 
-        <View
-            android:id="@+id/line3"
-            android:layout_width="360dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:visibility="invisible"
-            android:layout_marginBottom="9dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/fifthText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fourthText" />
 
         <TextView
-            android:id="@+id/fourthText"
+            android:id="@+id/itunesCountryDetail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -150,23 +90,12 @@
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="@+id/imageViewPoster"
             app:layout_constraintStart_toStartOf="@+id/imageViewPoster"
-            app:layout_constraintTop_toBottomOf="@+id/thirdText" />
+            app:layout_constraintTop_toBottomOf="@+id/itunesDescriptionDetail" />
+
+
 
         <TextView
-            android:id="@+id/fifthText"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:setPrice="@{contentResult}"
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:gravity="center_horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewPoster"
-            app:layout_constraintStart_toStartOf="@+id/imageViewPoster"
-            app:layout_constraintTop_toBottomOf="@+id/fourthText" />
-
-        <TextView
-            android:id="@+id/sixthText"
+            android:id="@+id/itunesreleaseDateDetail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -175,55 +104,12 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/imageViewPoster"
             app:layout_constraintStart_toStartOf="@+id/imageViewPoster"
-            app:layout_constraintTop_toBottomOf="@id/fifthText"
+            app:layout_constraintTop_toBottomOf="@id/itunesCountryDetail"
             android:setReleaseDate="@{contentResult.releaseDate}" />
 
-        <ImageView
-            android:id="@+id/likeIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_likeicon" />
 
 
-        <View
-            android:id="@+id/line4"
-            android:layout_width="240dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="9dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/buyButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sixthText" />
 
-
-        <Button
-            android:id="@+id/buyButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            android:layout_width="240dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/black"
-            android:text="Buy"
-            android:textColor="@color/white"
-            app:cornerRadius="20dp"
-            app:icon="@drawable/ic_carticon"
-            app:iconTint="@color/white"
-            app:iconPadding="8dp"
-            app:iconGravity="textStart"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/sixthText"
-            app:layout_constraintVertical_bias="0"
-            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,7 @@ fun myPlaceHolder(context: Context): CircularProgressDrawable {
         start()
     }
 }
-/*
+
 @BindingAdapter("android:downloadImage")
 fun downloadImage(view: ImageView, url: String) {
     view.downloadImage(url, myPlaceHolder(view.context))
@@ -44,10 +44,10 @@ fun collectionName(view: TextView, result: Result) {
 @BindingAdapter("android:setPrice")
 fun setPrice(view: TextView, result: Result) {
     if (result.collectionPrice.toString().isNullOrEmpty()) {
-        if (result.price <= 0) {
-            view.text = "Free"
+        if (result.price!! <= 0) {
+            view.text = view.context.getString(R.string.free)
         } else {
-            view.text = result.price.toString() + "$"
+            view.text = result.price.toString() + " " + view.context.getString(R.string.dolar)
         }
     }
 }
@@ -57,7 +57,5 @@ fun setReleaseDate(view: TextView, date: String) {
     val dateParse = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
     val dateFormat = SimpleDateFormat("dd/MM/yyyy")
     val text = dateFormat.format(dateParse.parse(date))
-    view.text = "Release Date: " + text
+    view.text = view.context.getString(R.string.releaseDate) + " " + text
 }
-
- */

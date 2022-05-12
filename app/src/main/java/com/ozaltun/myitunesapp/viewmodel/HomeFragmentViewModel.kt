@@ -25,7 +25,7 @@ class HomeFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     fun refreshData(term: String, entity: String): Flow<PagingData<Result>> {
         return Pager(
-            config = PagingConfig(pageSize = Constant.NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            config = PagingConfig(pageSize = Constant.PAGE_SIZE, enablePlaceholders = false),
             pagingSourceFactory = { ResultPagingSource(service, term, entity) })
             .flow.cachedIn(viewModelScope)
     }
