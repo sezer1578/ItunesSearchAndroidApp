@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ozaltun.myitunesapp.R
 import com.ozaltun.myitunesapp.adapter.HomeFragmentAdapter
@@ -22,15 +21,9 @@ import kotlinx.coroutines.flow.collectLatest
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var adapter: HomeFragmentAdapter
+    private var homeFragmentAdapter: HomeFragmentAdapter? = null
     private val viewModel: HomeFragmentViewModel by viewModels()
     var sharedPreferences: SharedPreferences? = null
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +32,15 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
         loadRecyclerView()
+        getPreferences()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        getSearch()
-
-    }
-
     fun getPreferences() {
-        sharedPreferences =
-            activity?.getSharedPreferences("com.ozaltun.myitunesapp", Context.MODE_PRIVATE)
+        sharedPreferences = activity?.getSharedPreferences(
+            "com.ozaltun.myitunesapp",
+            Context.MODE_PRIVATE
+        )
         binding.apply {
             textFieldInput.setText(
                 sharedPreferences?.getString(
@@ -67,6 +57,7 @@ class HomeFragment : Fragment() {
                 )
             )
         }
+
     }
 
     override fun onDestroyView() {
@@ -78,11 +69,17 @@ class HomeFragment : Fragment() {
             ?.apply()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getSearch()
+    }
+
+
     private fun search(term: String, entity: String) {
         if (viewModel.checkInternetConnection()) {
             lifecycleScope.launchWhenCreated {
                 viewModel.refreshData(term, entity).collectLatest {
-                    adapter?.submitData(it)
+                    homeFragmentAdapter?.submitData(it)
                 }
             }
         } else {
@@ -186,8 +183,8 @@ class HomeFragment : Fragment() {
 
 
     private fun loadRecyclerView() {
-        adapter = HomeFragmentAdapter()
-        binding.recyclerView.adapter = adapter
+        homeFragmentAdapter = HomeFragmentAdapter()
+        binding.recyclerView.adapter = homeFragmentAdapter
     }
 
 

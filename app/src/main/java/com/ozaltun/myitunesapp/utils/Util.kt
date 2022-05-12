@@ -26,7 +26,7 @@ fun myPlaceHolder(context: Context): CircularProgressDrawable {
         start()
     }
 }
-
+/*
 @BindingAdapter("android:downloadImage")
 fun downloadImage(view: ImageView, url: String) {
     view.downloadImage(url, myPlaceHolder(view.context))
@@ -59,3 +59,5 @@ fun setReleaseDate(view: TextView, date: String) {
     val text = dateFormat.format(dateParse.parse(date))
     view.text = "Release Date: " + text
 }
+
+ */

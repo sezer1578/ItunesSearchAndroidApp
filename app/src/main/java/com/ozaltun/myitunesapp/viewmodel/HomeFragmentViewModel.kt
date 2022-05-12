@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.ipsec.ike.IkeTunnelConnectionParams
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -21,12 +20,12 @@ import retrofit2.Retrofit
 
 class HomeFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    val retrofit: Retrofit = ItunesAPIService.createInstance(Constant.BASE_URL)
+    val retrofit: Retrofit = ItunesAPIService.createInstance()
     val service: ItunesAPI = retrofit.create(ItunesAPI::class.java)
 
     fun refreshData(term: String, entity: String): Flow<PagingData<Result>> {
         return Pager(
-            config = PagingConfig(pageSize = Constant.PAGE_SIZE, enablePlaceholders = false),
+            config = PagingConfig(pageSize = Constant.NETWORK_PAGE_SIZE, enablePlaceholders = false),
             pagingSourceFactory = { ResultPagingSource(service, term, entity) })
             .flow.cachedIn(viewModelScope)
     }

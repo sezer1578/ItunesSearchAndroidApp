@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedPreferences =
-            getSharedPreferences("com.ozaltun.myitunesapp.", Context.MODE_PRIVATE)
+            getSharedPreferences("com.ozaltun.myitunesapp", Context.MODE_PRIVATE)
         sharedPreferences?.edit()?.remove("category")?.apply()
         sharedPreferences?.edit()?.remove("searchTerm")?.apply()
     }

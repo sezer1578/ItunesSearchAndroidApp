@@ -10,7 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
+        android:id="@+id/constrailLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -41,8 +41,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:downloadImage="@{rowData.artworkUrl100}"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:downloadImage="@{rowData.artworkUrl100}"/>
 
                 <TextView
                     android:id="@+id/nameTxt"

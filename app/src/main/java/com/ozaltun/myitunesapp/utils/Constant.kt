@@ -2,8 +2,8 @@ package com.ozaltun.myitunesapp.utils
 
 object Constant {
     const val BASE_URL = "https://itunes.apple.com"
-    const val PAGE_SIZE = 20
-    const val LOAD_SIZE = 1
+    const val NETWORK_PAGE_SIZE = 20
+    const val INITIAL_LOAD_SIZE = 1
     const val QUERY_BOOKS = "ebook"
     const val QUERY_MOVIES = "movie"
     const val QUERY_APPS = "software"

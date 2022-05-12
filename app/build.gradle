@@ -3,9 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id("androidx.navigation.safeargs.kotlin")
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 32
@@ -73,4 +73,8 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.preference:preference-ktx:$preference_version")
     implementation "androidx.paging:paging-runtime:3.0.1"
+    implementation 'org.jsoup:jsoup:1.14.3'
+}
+kapt {
+    correctErrorTypes = true
 }
