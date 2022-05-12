@@ -1,5 +1,7 @@
 package com.ozaltun.myitunesapp.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -18,6 +20,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private var homeFragmentAdapter: HomeFragmentAdapter? = null
     private val viewModel: HomeFragmentViewModel by viewModels()
+    private var sharedPreferences: SharedPreferences? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +29,7 @@ class HomeFragment : Fragment() {
         binding.homeFragment = this
         loadRecyclerView()
         moviesOnClick()
+        getDataFromSharedPreferences()
         return binding.root
     }
 
@@ -43,6 +47,46 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() { //Saved the category and search value when go to the detail page
+        super.onDestroyView()
+        sharedPreferences?.edit()?.putString(Constant.SHARED_PREF_CATEGORY_KEY, getGenre())?.apply()
+        sharedPreferences?.edit()
+            ?.putString(Constant.SHARED_PREF_SEARCHTERM_KEY, binding.textFieldInput.text.toString())
+            ?.apply()
+    }
+
+    private fun getDataFromSharedPreferences() {
+        sharedPreferences =
+            activity?.getSharedPreferences("com.ozaltun.myitunesapp", Context.MODE_PRIVATE)
+        binding.apply {
+            textFieldInput.setText(
+                sharedPreferences?.getString(
+                    Constant.SHARED_PREF_SEARCHTERM_KEY,
+                    ""
+                )
+            )
+
+        }
+    }
+
+    private fun getGenre(): String {
+        when (binding.toggleButton.checkedButtonId) {
+            binding.moviesButton.id -> {
+                return Constant.QUERY_MOVIES
+            }
+            binding.appsButton.id -> {
+                return Constant.QUERY_APPS
+            }
+            binding.booksButton.id -> {
+                return Constant.QUERY_BOOKS
+            }
+            binding.musicButton.id -> {
+                return Constant.QUERY_MUSIC
+            }
+            else -> return Constant.QUERY_MOVIES
+        }
     }
 
     fun booksOnClick() {

@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.ozaltun.myitunesapp.R
-import com.ozaltun.myitunesapp.databinding.FragmentDetailBinding
+import com.ozaltun.myitunesapp.databinding.FragmentDetaillBinding
 import com.ozaltun.myitunesapp.model.Result
 import com.ozaltun.myitunesapp.utils.Constant
 
 class DetailFragment : Fragment() {
-    private lateinit var binding: FragmentDetailBinding
+    private lateinit var binding: FragmentDetaillBinding
     var result: Result? = null
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detaill, container, false)
         binding.detailsFragment = this
         return binding.root
     }
@@ -55,26 +55,26 @@ class DetailFragment : Fragment() {
 
     private fun setMusicViews() {
         binding.apply {
-            itunesNameDetail.setText(result?.trackName)
-            itunesGenreDetail.setText(getString(R.string.collection) + " " + result?.collectionName)
-            itunesDescriptionDetail.setText(getString(R.string.author) + " " + result?.artistName)
+            nameDetail.setText(result?.trackName)
+            genreDetail.setText(getString(R.string.collection) + " " + result?.collectionName)
+            descriptionDetail.setText(getString(R.string.author) + " " + result?.artistName)
             itunesCountryDetail.setText(getString(R.string.country) + " " + result?.country)
         }
     }
 
     private fun setMovieViews() {
         binding.apply {
-            itunesNameDetail.setText(result?.trackName)
-            itunesGenreDetail.setText(result?.primaryGenreName)
-            itunesDescriptionDetail.setText(result?.longDescription)
+            nameDetail.setText(result?.trackName)
+            genreDetail.setText(result?.primaryGenreName)
+            descriptionDetail.setText(result?.longDescription)
             itunesCountryDetail.setText(getString(R.string.country) + " " + result?.country)
         }
     }
 
     private fun setBooksViews() {
         binding.apply {
-            itunesNameDetail.setText(result?.trackName)
-            itunesGenreDetail.setText(getString(R.string.author) + " " + result?.artistName)
+            nameDetail.setText(result?.trackName)
+            genreDetail.setText(getString(R.string.author) + " " + result?.artistName)
             val description: String? = null
             if (description == null) {
                 itunesCountryDetail.setText(getString(R.string.noDesc))
@@ -87,9 +87,9 @@ class DetailFragment : Fragment() {
 
     private fun setSoftwareViews() {
         binding.apply {
-            itunesNameDetail.setText(result?.trackName)
-            itunesGenreDetail.setText(result?.primaryGenreName)
-            itunesDescriptionDetail.setText(result?.longDescription)
+            nameDetail.setText(result?.trackName)
+            genreDetail.setText(result?.primaryGenreName)
+            descriptionDetail.setText(result?.longDescription)
             itunesCountryDetail.setText("Country: " + result?.country)
         }
     }

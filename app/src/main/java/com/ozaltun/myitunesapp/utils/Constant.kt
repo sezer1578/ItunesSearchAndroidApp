@@ -14,4 +14,6 @@ object Constant {
     const val TYPE_SOFTWARE = "software"
     const val TYPE_BOOK = "ebook"
     const val TYPE_MOVIE = "feature-movie"
+    const val SHARED_PREF_CATEGORY_KEY="category"
+    const val SHARED_PREF_SEARCHTERM_KEY="searchTerm"
 }

@@ -30,12 +30,6 @@ data class Result(
     val artistName: String?,
     @SerializedName("primaryGenreName")
     val primaryGenreName: String?,
-   // @SerializedName("sellerName")
-   // val sellerName: String,
-   // @SerializedName("description")
-   // val description: String,
-   // @SerializedName("genres")
-    //val genres: List<String>,
     @SerializedName("trackId")
-    val trackId: String
+    val trackId: Int
 ) : Parcelable

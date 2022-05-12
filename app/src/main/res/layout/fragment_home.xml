@@ -14,7 +14,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.HomeFragment">
+        tools:context=".view.HomeFragment"
+        android:background="@color/backGround">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField"
@@ -22,11 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="20dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="@color/orange"
+            android:shadowRadius="@integer/material_motion_duration_long_1"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeErrorColor="@color/orange"
             app:boxStrokeWidthFocused="0dp"
             app:endIconMode="clear_text"
             android:hint="@string/search"
@@ -43,8 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:hint="@string/apple"
+                android:imeOptions="actionDone"
+                android:backgroundTint="@color/backGround"
+                android:background="@color/white"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -56,7 +63,7 @@
             android:layout_height="wrap_content"
             app:singleSelection="true"
             app:selectionRequired="true"
-            app:checkedButton="@id/MoviesButton"
+            app:checkedButton="@id/moviesButton"
             app:layout_constraintTop_toBottomOf="@id/textField"
             app:layout_constraintStart_toStartOf="@id/textField"
             app:layout_constraintEnd_toEndOf="@id/textField"
@@ -64,10 +71,11 @@
 
 
             <Button
-                android:id="@+id/MoviesButton"
+                android:id="@+id/moviesButton"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAllCaps="false"
                 android:text="@string/movies"
                 android:textColor="@color/black"
                 android:onClick="@{()->homeFragment.moviesOnClick()}"
@@ -75,9 +83,10 @@
                 app:cornerRadius="10dp" />
 
             <Button
-                android:id="@+id/MusicsButton"
+                android:id="@+id/musicButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAllCaps="false"
                 android:text="@string/music"
                 android:textSize="12sp"
                 android:textColor="#1E1E1E"
@@ -85,9 +94,10 @@
                 style="?attr/materialButtonOutlinedStyle"
                 />
             <Button
-                android:id="@+id/AppsButton"
+                android:id="@+id/appsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAllCaps="false"
                 android:text="@string/apps"
                 android:textSize="12sp"
                 android:textColor="@color/black"
@@ -95,9 +105,10 @@
                 style="?attr/materialButtonOutlinedStyle"
                 />
             <Button
-                android:id="@+id/BooksButton"
+                android:id="@+id/booksButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAllCaps="false"
                 android:text="@string/books"
                 android:textSize="12sp"
                 android:textColor="@color/black"
