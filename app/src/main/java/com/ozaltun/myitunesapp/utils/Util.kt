@@ -41,17 +41,6 @@ fun collectionName(view: TextView, result: Result) {
     }
 }
 
-@BindingAdapter("android:setPrice")
-fun setPrice(view: TextView, result: Result) {
-    if (result.collectionPrice.toString().isNullOrEmpty()) {
-        if (result.price!! <= 0) {
-            view.text = view.context.getString(R.string.free)
-        } else {
-            view.text = result.price.toString() + " " + view.context.getString(R.string.dolar)
-        }
-    }
-}
-
 @BindingAdapter("android:setReleaseDate")
 fun setReleaseDate(view: TextView, date: String) {
     val dateParse = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
